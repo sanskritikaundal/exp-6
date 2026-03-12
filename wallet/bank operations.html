@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Simple Banking Wallet</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #4e73df, #1cc88a);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .wallet {
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      width: 350px;
+      text-align: center;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    }
+
+    h2 {
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    .balance {
+      font-size: 28px;
+      margin: 20px 0;
+      font-weight: bold;
+      color: #4e73df;
+    }
+
+    button {
+      padding: 10px 15px;
+      margin: 5px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: 0.3s;
+    }
+
+    .add-btn {
+      background: #1cc88a;
+      color: white;
+    }
+
+    .add-btn:hover {
+      background: #17a673;
+    }
+
+    .withdraw-btn {
+      background: #e74a3b;
+      color: white;
+    }
+
+    .withdraw-btn:hover {
+      background: #c0392b;
+    }
+
+    .message {
+      margin-top: 15px;
+      font-size: 14px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="wallet">
+    <h2>💰 My Wallet</h2>
+    <div class="balance">Balance: ₹<span id="balance">0</span></div>
+
+    <h3>Add Money</h3>
+    <button class="add-btn" onclick="addMoney(500)">+ ₹500</button>
+    <button class="add-btn" onclick="addMoney(1000)">+ ₹1000</button>
+    <button class="add-btn" onclick="addMoney(2000)">+ ₹2000</button>
+
+    <h3>Withdraw Money</h3>
+    <input type="number" id="withdrawAmount" placeholder="Enter amount" />
+    <br>
+    <button class="withdraw-btn" onclick="withdrawMoney()">Withdraw</button>
+
+    <div class="message" id="message"></div>
+  </div>
+
+  <script>
+    let balance = 0;
+
+    function updateBalance() {
+      document.getElementById("balance").innerText = balance;
+    }
+
+    function addMoney(amount) {
+      balance += amount;
+      updateBalance();
+      showMessage("₹" + amount + " added successfully!", "green");
+    }
+
+    function withdrawMoney() {
+      let amount = parseInt(document.getElementById("withdrawAmount").value);
+
+      if (isNaN(amount) || amount <= 0) {
+        showMessage("Enter a valid amount!", "orange");
+        return;
+      }
+
+      if (amount > balance) {
+        showMessage("Insufficient Balance!", "red");
+      } else {
+        balance -= amount;
+        updateBalance();
+        showMessage("₹" + amount + " withdrawn successfully!", "green");
+      }
+
+      document.getElementById("withdrawAmount").value = "";
+    }
+
+    function showMessage(msg, color) {
+      let messageDiv = document.getElementById("message");
+      messageDiv.innerText = msg;
+      messageDiv.style.color = color;
+    }
+  </script>
+</body>
+</html>
