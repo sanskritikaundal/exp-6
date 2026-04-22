@@ -1,17 +1,115 @@
+
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>
-        .demo {
-            font-size: medium
-            ;
-        }
-    </style>
+  <title>Product Card UI</title>
+
+  <!-- React CDN -->
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f6f9;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .app {
+      text-align: center;
+    }
+
+    .container {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 20px;
+    }
+
+    .card {
+      background: white;
+      padding: 20px;
+      width: 240px;
+      border-radius: 15px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+      transition: 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    h2 {
+      margin-bottom: 10px;
+      color: #2c3e50;
+    }
+
+    .price {
+      font-size: 18px;
+      margin: 10px 0;
+      color: #555;
+    }
+
+    .status {
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+    .in {
+      color: green;
+    }
+
+    .out {
+      color: red;
+    }
+  </style>
 </head>
-<body><h1 class="demo">Design Resume</h1>
-<h2 class="demo">Checking how to style Id</h2>
+
+<body>
+
+<div id="root"></div>
+
+<script type="text/babel">
+
+  // Product Card Component
+  function ProductCard(props) {
+    return (
+      <div className="card">
+        <h2>{props.name}</h2>
+        <p className="price">Price: ₹{props.price}</p>
+
+        <p className={`status ${props.inStock ? "in" : "out"}`}>
+          {props.inStock ? "In Stock" : "Out of Stock"}
+        </p>
+      </div>
+    );
+  }
+
+  // App Component
+  function App() {
+    return (
+      <div className="app">
+        <h1>🛒 Product Store</h1>
+
+        <div className="container">
+          <ProductCard name="Laptop" price={55000} inStock={true} />
+          <ProductCard name="Headphones" price={2000} inStock={false} />
+        </div>
+      </div>
+    );
+  }
+
+  // Render
+  const root = ReactDOM.createRoot(document.getElementById("root"));
+  root.render(<App />);
+
+</script>
+
 </body>
 </html>
