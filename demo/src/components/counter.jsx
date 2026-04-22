@@ -16,7 +16,7 @@ function App() {
     <div style={{ textAlign: "center", marginTop: "50px" }}>
       <h1>React Counter Application</h1>
 
-      <h2>Counter: {count}</h2>
+      <h2>Counter: {count}</h2>/
 
       <button onClick={increment} style={{ margin: "10px", padding: "10px" }}>
         Increment
@@ -28,5 +28,6 @@ function App() {
     </div>
   );
 }
+git push -u origin main
 
 export default App;
